@@ -1,10 +1,16 @@
+const upgradeRoutes = require('./routes/upgradeRoutes');
+app.use('/api/upgrades', upgradeRoutes);
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
+
 app.use(express.json());
 
 // Conexão com MongoDB
@@ -28,17 +34,6 @@ const Upgrade = mongoose.model('Upgrade', new mongoose.Schema({
   raridade: String,
   timestamp: { type: Date, default: Date.now },
 }));
-
-app.post('/api/upgrades', async (req, res) => {
-  try {
-    const novo = new Upgrade(req.body);
-    await novo.save();
-    res.status(201).json({ message: 'Upgrade salvo!', id: novo._id });
-  } catch (err) {
-    console.error("❌ Erro no backend:", err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Servidor online na porta ${PORT}`));
