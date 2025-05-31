@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const Upgrade = require('../models/Upgrade');
+const Upgrade = require('../models/Upgrade'); // usa o model separado
 
 router.post('/', async (req, res) => {
   try {
-    app.post('/api/upgrades', async (req, res) => {
-  try {
-    console.log("📦 Dados recebidos:", req.body); // ← Adicione isso
+    console.log("📦 Dados recebidos:", req.body);
 
     const data = {
       ...req.body,
@@ -19,16 +17,8 @@ router.post('/', async (req, res) => {
     await novo.save();
     res.status(201).json({ message: 'Upgrade salvo!', id: novo._id });
   } catch (err) {
-    console.error("❌ Erro no backend:", err); // ← Mostrará a exceção real
+    console.error("❌ Erro no backend:", err);
     res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
-
-    const upgrade = new Upgrade(req.body);
-    await upgrade.save();
-    res.status(201).json({ message: 'Upgrade salvo com sucesso', upgrade });
-  } catch (err) {
-    res.status(500).json({ message: 'Erro ao salvar upgrade', error: err });
   }
 });
 
