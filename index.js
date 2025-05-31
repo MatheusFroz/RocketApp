@@ -29,7 +29,7 @@ const Upgrade = mongoose.model('Upgrade', new mongoose.Schema({
   itemimg: String,
   valor: Number,
   price: Number,
-  roll: Number,
+  roll: String,
   result: String,
   raridade: String,
   timestamp: { type: Date, default: Date.now },
